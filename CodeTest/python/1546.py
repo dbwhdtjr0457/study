@@ -1,6 +1,3 @@
-from audioop import avg
-
-
 num = int(input())
 data = list(map(int, input().split()))
 
