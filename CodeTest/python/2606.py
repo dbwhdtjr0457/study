@@ -1,3 +1,6 @@
+from collections import deque
+
+
 m = int(input())
 n = int(input())
 
@@ -8,7 +11,7 @@ for i in range(n):
     graph[input1].append(input2)
     graph[input2].append(input1)
 
-visited = [False] * m
+visited = [False] * (m+1)
 
 def dfs(graph, v, visited):
     visited[v] = True
@@ -16,6 +19,17 @@ def dfs(graph, v, visited):
         if not visited[i]:
             dfs(graph, i, visited)
 
-dfs(graph, 1, visited)
+
+def bfs(graph, start, visited):
+    queue = deque([start])
+    visited[start] = True
+    while queue:
+        v = queue.popleft()
+        for i in graph[v]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = True
+
+bfs(graph, 1, visited)
 
 print(visited.count(True) - 1)
