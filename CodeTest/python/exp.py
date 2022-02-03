@@ -1,11 +1,10 @@
-from pprint import pprint
+from collections import deque
 
 
-newList =  [[0] * 10 for _ in range(10)]
-for row in newList:
-    print(row)
+queue = deque()
 
-print("\n")
-newList[1][1] = 1
-for row in newList:
-    print(row)
+queue.append(1)
+queue.append(2)
+
+print(queue.index(1))
+print(queue.index(3))
