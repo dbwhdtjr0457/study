@@ -1,5 +1,7 @@
 from collections import deque
-
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(100000)
 m, n = map(int, input().split())
 
 graph = []
@@ -34,43 +36,43 @@ def dfs(x, y, visited):
     
     return False
 
-def bfs(x, y, visited):         
-    if visited[x][y] == True:
-        return False
+# def bfs(x, y, visited):         
+#     if visited[x][y] == True:
+#         return False
 
-    queue = deque()
-    queue.append((x, y))
+#     queue = deque()
+#     queue.append((x, y))
 
-    while queue:
-        count = 0
-        x, y = queue.popleft()
-        visited[x][y] = True
-        if x >= 1 and originalGraph[x - 1][y] == 0:
-            count += 1
-        elif x >= 1 and originalGraph[x - 1][y] != 0 and not visited[x - 1][y] and queue.count((x - 1, y)) == 0:
-            queue.append((x - 1, y))
-        if x <= m - 2 and originalGraph[x + 1][y] == 0:
-            count += 1
-        elif x <= m - 2 and originalGraph[x + 1][y] != 0 and not visited[x + 1][y] and queue.count((x + 1, y)) == 0:
-            queue.append((x + 1, y))
-        if y >= 1 and originalGraph[x][y - 1] == 0:
-            count += 1
-        elif y >= 1 and originalGraph[x][y - 1] != 0 and not visited[x][y - 1] and queue.count((x, y - 1)) == 0:
-            queue.append((x, y - 1))
-        if y <= n - 2 and originalGraph[x][y + 1] == 0:
-            count += 1
-        elif y <= n - 2 and originalGraph[x][y + 1] != 0 and not visited[x][y + 1] and queue.count((x, y + 1)) == 0:
-            queue.append((x, y + 1))
+#     while queue:
+#         count = 0
+#         x, y = queue.popleft()
+#         visited[x][y] = True
+#         if x >= 1 and originalGraph[x - 1][y] == 0:
+#             count += 1
+#         elif x >= 1 and originalGraph[x - 1][y] != 0 and not visited[x - 1][y] and queue.count((x - 1, y)) == 0:
+#             queue.append((x - 1, y))
+#         if x <= m - 2 and originalGraph[x + 1][y] == 0:
+#             count += 1
+#         elif x <= m - 2 and originalGraph[x + 1][y] != 0 and not visited[x + 1][y] and queue.count((x + 1, y)) == 0:
+#             queue.append((x + 1, y))
+#         if y >= 1 and originalGraph[x][y - 1] == 0:
+#             count += 1
+#         elif y >= 1 and originalGraph[x][y - 1] != 0 and not visited[x][y - 1] and queue.count((x, y - 1)) == 0:
+#             queue.append((x, y - 1))
+#         if y <= n - 2 and originalGraph[x][y + 1] == 0:
+#             count += 1
+#         elif y <= n - 2 and originalGraph[x][y + 1] != 0 and not visited[x][y + 1] and queue.count((x, y + 1)) == 0:
+#             queue.append((x, y + 1))
 
-        graph[x][y] -= count
-        if graph[x][y] < 0:
-            graph[x][y] = 0
+#         graph[x][y] -= count
+#         if graph[x][y] < 0:
+#             graph[x][y] = 0
         
 
-    return True
+#     return True
 
 
-year = 0
+# year = 0
 # while True:
 #     visited = [[False] * n for _ in range(m)]
 #     num = 0
@@ -86,6 +88,7 @@ year = 0
 
 #     year += 1
 
+year = 0
 while True:
     visited = [[False] * n for _ in range(m)]
     num = 0
