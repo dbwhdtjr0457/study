@@ -30,7 +30,7 @@ if n == 1:
 elif n == 2:
     if m == 0:
         print(1)
-    if m == 1:
+    elif m == 1:
         print(3)
     else:
         print(4)
