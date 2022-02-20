@@ -1,9 +1,12 @@
+import sys
+
+
 n = int(input())
 
 data = set()
 
 for _ in range(n):
-    inputList = input().split()
+    inputList = sys.stdin.readline().split()
     if len(inputList) == 2:
         cmd, num = inputList[0], inputList[1]
         if cmd == "add" and num not in data:
