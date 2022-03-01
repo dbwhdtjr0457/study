@@ -26,7 +26,4 @@ for row in data:
     if row.count(0) == 1:
         result += 1
 
-for row in data:
-    print(row)
-
 print(result)
