@@ -1,0 +1,45 @@
+body{
+    display: contents;
+}
+
+.navbar{
+    float: right;
+    margin: 20px;
+}
+
+.nav-item{
+    text-decoration: none;
+    color: black;
+    margin-right: 15px;
+}
+
+.nav-item:hover{
+    text-decoration: underline;
+}
+
+.main{
+    margin-top: 300px;
+    text-align: center;
+}
+
+.input-area{
+    margin-top: 20px;
+
+}
+
+.input-box{
+    width: 561px;
+    height: 44px;
+    border-radius: 20px;
+    border: 1px solid #dfe1e5;
+}
+
+.search-icon{
+    position: relative;
+    left: 40px;
+}
+
+.mic-icon{
+    position: relative;
+    right: 40px;
+}
