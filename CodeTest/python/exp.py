@@ -1,11 +1,6 @@
-arr = []
-if arr:
-    print(True)
-else:
-    print(False)
+from math import sqrt
 
-arr.append(1)
-if arr:
-    print(True)
-else:
-    print(False)
+
+a = pow(round(sqrt(4)), 2)
+
+print(a == 4)
