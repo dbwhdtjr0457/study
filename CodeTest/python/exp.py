@@ -1,77 +1,133 @@
-import sys
-import collections
-import heapq
-
+# # A번
+# from itertools import permutations
 
 # n = int(input())
-# flights = []
-# for _ in range(n):
-#     flights.append(list(map(int, input().split())))
-# start, end, K = map(int, input().split())
-n = 13
-flights = [[11, 12, 74], [1, 8, 91], [4, 6, 13], [7, 6, 39], [5, 12, 8], [0, 12, 54], [8, 4, 32], [0, 11, 4], [4, 0, 91], [11, 7, 64], [6, 3, 88], [8, 5, 80], [11, 10, 91], [10, 0, 60], [8, 7, 92], [12, 6, 78], [6, 2, 8], [4, 3, 54], [3, 11, 76], [3, 12, 23], [11, 6, 79], [6, 12, 36], [2, 11, 100], [2, 5, 49], [7, 0, 17], [5, 8, 95], [3, 9, 98], [8, 10, 61], [
-    2, 12, 38], [5, 7, 58], [9, 4, 37], [8, 6, 79], [9, 0, 1], [2, 3, 12], [7, 10, 7], [12, 10, 52], [7, 2, 68], [12, 2, 100], [6, 9, 53], [7, 4, 90], [0, 5, 43], [11, 2, 52], [11, 8, 50], [12, 4, 38], [7, 9, 94], [2, 7, 38], [3, 7, 88], [9, 12, 20], [12, 0, 26], [10, 5, 38], [12, 8, 50], [0, 2, 77], [11, 0, 13], [9, 10, 76], [2, 6, 67], [5, 6, 34], [9, 7, 62], [5, 3, 67]]
-start = 10
-end = 1
-K = 9
+
+# cost = list(map(int, input().split()))
+# discount = [[] for _ in range(n)]
+
+# for i in range(n):
+#     k = int(input())
+#     for _ in range(k):
+#         discount[i].append(tuple(map(int, input().split())))
+
+# minNum = float('inf')
+
+# for i in permutations([k for k in range(n)], n):
+#     tempCost = cost[:]
+#     result = 0
+#     for j in i:
+#         result += tempCost[j]
+#         for item in discount[j]:
+#             x, y = item[0] - 1, item[1]
+#             tempCost[x] -= y
+#             if tempCost[x] <= 0:
+#                 tempCost[x] = 1
+#     minNum = min(minNum, result)
+
+# print(minNum)
+
+# ## 이왜맞?
+
+# B번
 
 
-def solution(n, flights, start, end, K):
-    graph = collections.defaultdict(list)
-    for u, v, w in flights:
-        graph[u].append((v, w))
+n, q = map(int, input().split())
 
-    Q = [(0, start, K)]
+mapData = [0] + list(map(int, input().split()))
 
-    visited = {}
+mapLink = [[] for _ in range(n + 1)]
 
-    while Q:
-        price, node, k = heapq.heappop(Q)
+for _ in range(n - 1):
+    x, y = map(int, input().split())
+    mapLink[x].append(y)
+    mapLink[y].append(x)
 
-        if node == end:
-            return price
-
-        if k >= 0:
-            for v, w in graph[node]:
-                alt = price + w
-                heapq.heappush(Q, (alt, v, k - 1))
-
-    return -1
+resultList = []
 
 
-print(solution(n, flights, start, end, K))
+def dfs(start, end, result):
+
+    result += str(mapData[start])
+    if start == end:
+        print(int(result) % 1000000007)
+        return
+    visited[start] = True
+
+    for item in mapLink[start]:
+        if item == end:
+            print(int(result + str(mapData[item])) % 1000000007)
+            return
+        if not visited[item]:
+            dfs(item, end, result)
 
 
-n = 13
-flights = [[11, 12, 74], [1, 8, 91], [4, 6, 13], [7, 6, 39], [5, 12, 8], [0, 12, 54], [8, 4, 32], [0, 11, 4], [4, 0, 91], [11, 7, 64], [6, 3, 88], [8, 5, 80], [11, 10, 91], [10, 0, 60], [8, 7, 92], [12, 6, 78], [6, 2, 8], [4, 3, 54], [3, 11, 76], [3, 12, 23], [11, 6, 79], [6, 12, 36], [2, 11, 100], [2, 5, 49], [7, 0, 17], [5, 8, 95], [3, 9, 98], [8, 10, 61], [
-    2, 12, 38], [5, 7, 58], [9, 4, 37], [8, 6, 79], [9, 0, 1], [2, 3, 12], [7, 10, 7], [12, 10, 52], [7, 2, 68], [12, 2, 100], [6, 9, 53], [7, 4, 90], [0, 5, 43], [11, 2, 52], [11, 8, 50], [12, 4, 38], [7, 9, 94], [2, 7, 38], [3, 7, 88], [9, 12, 20], [12, 0, 26], [10, 5, 38], [12, 8, 50], [0, 2, 77], [11, 0, 13], [9, 10, 76], [2, 6, 67], [5, 6, 34], [9, 7, 62], [5, 3, 67]]
-src = 10
-dst = 1
-K = 10
-
-graph = collections.defaultdict(list)
-INF = float('inf')
-K += 1
-dist = [[INF] * n for _ in range(K+1)]
-for s, e, v in flights:
-    graph[s].append((e, v))
+for _ in range(q):
+    visited = [False for _ in range(n + 1)]
+    start, end = map(int, input().split())
+    result = ''
+    dfs(start, end, result)
 
 
-def dijkstra(start):
-    queue = []
-    heapq.heappush(queue, (0, start, K))
-    dist[K][start] = 0
-
-    while queue:
-        d, node, k = heapq.heappop(queue)
-
-        for nxt, val in graph[node]:
-            cost = d + val
-            if k-1 >= 0 and dist[k-1][nxt] > cost:
-                dist[k-1][nxt] = cost
-                heapq.heappush(queue, (cost, nxt, k-1))
+# # C번
 
 
-dijkstra(src)
+# from collections import defaultdict
+# from itertools import combinations
 
-print(min(list(zip(*dist))[dst]))
+# n = int(input())
+# dict = defaultdict(list)
+# data = input()
+
+# for i, char in enumerate(data):
+#     if char == "W" or char == "H" or char == "E":
+#         dict[char].append(i)
+
+# for char in dict:
+#     dict[char].reverse()
+
+# result = 0
+# prevResult = 0
+# prev = float('inf')
+# for i in dict['W']:
+#     for j in dict['H']:
+#         if j > i and j < prev:
+#             for k in range(len(dict['E'])):
+#                 eTemp = -1
+#                 if dict['E'][k] <= j:
+#                     eTemp = k
+#                     break
+#             if eTemp != -1:
+#                 for t in range(2, len(dict['E'][:eTemp]) + 1):
+#                     result += len(list(combinations(dict['E'][:eTemp], t)))
+#             else:
+#                 for t in range(2, len(dict['E']) + 1):
+#                     result += len(list(combinations(dict['E'], t)))
+#     result += prevResult
+#     prev = i
+#     prevResult = result
+
+# print(result % 1000000007)
+
+# # 개선 C번
+
+# from collections import Counter
+# n = int(input())
+# data = input()
+# dict = Counter(data)
+
+# tempW = 0
+# tempE = dict['E']
+
+# result = 0
+
+# for char in data:
+#     if char == 'W':
+#         tempW += 1
+#     elif char == 'E':
+#         tempE -= 1
+#     elif char == 'H':
+#         result += tempW * (pow(2, tempE) - tempE - 1)
+
+# print(result % 1000000007)
+# # 맞 았 다 !

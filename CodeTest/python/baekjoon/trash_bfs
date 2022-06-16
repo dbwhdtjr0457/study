@@ -1,0 +1,48 @@
+# from collections import defaultdict, deque
+# import sys
+
+# n, k = map(int, input().split())
+
+# arr = [[] for _ in range(n)]
+
+
+# def bfs(visited, num):
+#     queue = deque([num])
+#     visited[num] = True
+
+#     while queue:
+#         temp = queue.popleft()
+#         for item in arr[temp]:
+#             if not visited[item]:
+#                 queue.append(item)
+#                 visited[item] = True
+
+
+# for _ in range(k):
+#     visited = [False] * n
+#     cmd, num1, num2 = map(int, input().split())
+#     if cmd == 1:
+#         arr[num1 - 1].append(num2 - 1)
+#         arr[num2 - 1].append(num1 - 1)
+#     elif cmd == 2:
+#         arr[num1 - 1].remove(num2 - 1)
+#         arr[num2 - 1].remove(num1 - 1)
+#     count = 0
+#     for i in range(n):
+#         if not visited[i]:
+#             bfs(visited, i)
+#             count += 1
+#     print(count)
+#     sys.stdout.flush()
+
+
+import sys
+input = sys.stdin.readline
+
+
+n, k = map(int, input().split())
+for i in range(k):
+    a, b, c = map(int, input().split())
+
+    print(n - 2 + a)
+    sys.stdout.flush()
