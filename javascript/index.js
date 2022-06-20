@@ -1,1 +1,1 @@
-console.log(10 / 0);
+console.log("Hello world!")
