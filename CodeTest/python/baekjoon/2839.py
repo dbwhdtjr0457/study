@@ -15,5 +15,4 @@ for i in range(6, n + 1):
     elif arr[i - 3] != -1 and arr[i - 5] != -1:
         arr[i] = min(arr[i - 3], arr[i - 5]) + 1
 
-print(arr)
 print(arr[n])
