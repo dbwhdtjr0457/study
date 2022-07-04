@@ -1,1 +1,2 @@
-print("Hello world!")
+temp = "S"
+print(temp + "D")
