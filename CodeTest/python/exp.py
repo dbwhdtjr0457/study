@@ -1,2 +1,2 @@
-temp = "S"
-print(temp + "D")
+x, y = map(int, input().split())
+print(x, y)
