@@ -1,7 +1,8 @@
-for (var i = 0; i < 6; i++) {
-    setTimeout(() => console.log(i), 100);
-  }
-  
-  for (let i = 0; i < 6; i++) {
-    setTimeout(() => console.log(i), 100);
-  }
+const a = {x: {y: 10}};
+
+const b = {...a};
+
+console.log(a);
+console.log(b);
+console.log(a === b);
+console.log(a.x === b.x)
