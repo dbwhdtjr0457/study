@@ -100,4 +100,73 @@
 // weather.getInfo1()
 // weather.getInfo2()
 
-// 
+// p.249
+
+// const increase = function (num) 
+// {
+//     return ++num;
+// };
+
+// const decrease = function (num)
+// {
+//     return --num;
+// };
+
+// const auxs = {increase, decrease};
+
+// function makeCounter(aux) 
+// {
+//     let num = 0;
+
+//     return function()
+//     {
+//         num = aux(num);
+//         return num;
+//     };
+// }
+
+// const increaser = makeCounter(auxs.increase);
+// console.log(increaser()); // 1
+// console.log(increaser()); // 2
+
+// p. 254
+
+// function sum() {
+//     let res = 0;
+
+//     for (let i = 0; i < arguments.length; i++) {
+//         res += arguments[i];
+//     }
+
+//     return res;
+// }
+
+// console.log(sum()); // 0
+// console.log(sum(1, 2)); // 3
+// console.log(sum(1, 2, 3)); // 6
+
+// p. 263
+
+// function Circle(radius) {
+//     this.radius = radius;
+// }
+
+// // Circle 생성자 함수가 생성한 모든 인스턴스가 getArea 메서드를
+// // 공유해서 사용할 수 있도록 프로토타입에 추가한다.
+// Circle.prototype.getArea = function () {
+//     return Math.PI * this.radius ** 2;
+// }
+
+
+// p. 277
+
+// console.log(Person);
+
+// console.log(Person("Hi"));
+
+// function Person(name) {
+//     this.name = name;
+//     return (name);
+// }
+
+console.log(global.Object === Object);
