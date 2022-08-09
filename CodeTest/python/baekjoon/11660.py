@@ -11,9 +11,6 @@ for i in range(1, n):
     for j in range(n):
         mapData[i][j] += mapData[i - 1][j]
 
-print(mapData)
-
-
 result = []
 for _ in range(m):
     start_x, start_y, end_x, end_y = map(int, input().split())

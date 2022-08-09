@@ -169,4 +169,293 @@
 //     return (name);
 // }
 
-console.log(global.Object === Object);
+// // p.300
+
+// //프로토타입이 null인 객체 생성.
+// // obj -> null
+// let obj = Object.create(null);
+// console.log(Object.getPrototypeOf(obj) == null); // true
+// // Object.prototype을 상속받지 못한다.
+// //console.log(obj.toString()); -> TypeError
+
+// // obj -> Object.prototype -> null
+// // obj = {};와 동일하다.
+// obj = Object.create(Object.prototype);
+// console.log(Object.getPrototypeOf(obj) == Object.prototype); // true
+
+// // obj => Object.prototype -> null
+// // obj = { x: 1 };와 동일하다.
+// obj = Object.create(Object.prototype, {
+//     x: {value: 1, writable: true, enumerable: true, configurable: true}
+// });
+// // 위 코드는 아래와 동일하다.
+// // obj = Object.create(Object.prototype);
+// // obj.x = 1;
+// console.log(obj.x); // 1
+// console.log(Object.getPrototypeOf(obj) === Object.prototype); // true
+
+// const myProto = { x: 10 };
+// // 임의의 객체를 직접 상속받는다.
+// // obj -> myProto -> Object.prototype -> null
+// obj = Object.create(myProto);
+// console.log(obj.x);
+// console.log(Object.getPrototypeOf(obj) === myProto); // true
+
+// // 생성자 함수
+// function Person(name) {
+//     this.name = name
+// }
+
+// // obj -> person.prototype -> Object.prototype -> null
+// // obj = new Person('Lee')와 동일하다.
+// obj = Object.create(Person.prototype);
+// obj.name = 'Lee';
+// console.log(obj.name); // Lee
+// console.log(Object.getPrototypeOf(obj) === Person.prototype); // true
+
+// p. 226
+
+// const person = {};
+
+// Object.defineProperty(person, 'firstName', {
+//     value: 'Ungmo',
+//     writable: true,
+//     enumerable: true,
+//     configurable: true
+// });
+
+// Object.defineProperty(person, 'lastName', {
+//     value: 'Lee'
+// });
+
+// let descriptor = Object.getOwnPropertyDescriptor(person, 'firstName');
+// console.log('firstName', descriptor);
+
+// descriptor = Object.getOwnPropertyDescriptor(person, 'lastName');
+// console.log('lastName', descriptor);
+
+
+
+// console.log(Object.keys(person));
+
+// person.lastName = 'Kim';
+
+// delete person.lastName;
+
+// descriptor = Object.getOwnPropertyDescriptor(person, 'lastName');
+// console.log('lastName', descriptor);
+
+// Object.defineProperty(person, 'fullName', {
+//     get() {
+//         return `${this.firstName} ${this.lastName}`;
+//     },
+
+//     set(name) {
+//         [this.firstName, this.lastName] = name.split(' ');
+//     },
+//     enumerable: true,
+//     configurable: true
+// });
+
+// descriptor = Object.getOwnPropertyDescriptor(person, 'fullName');
+// console.log('fullName', descriptor);
+
+// person.fullName = 'Heegun Kim';
+// descriptor = Object.getOwnPropertyDescriptor(person, 'lastName');
+// console.log('lastName', descriptor)
+// console.log(person);
+
+// function Circle(radius) {
+//     // // new.target
+//     // if (!new.target) {
+//     //     return new Circle(radius);
+//     // }
+//     // // 스코프 세이프
+//     // if (!(this instanceof Circle)) {
+//     //     return new Circle(radius);
+//     // }
+
+//     this.radius = radius;
+//     this.getDiameter = function() {
+//         return 2 * this.radius;
+//     };
+// }
+
+// p.249
+
+// const CircleDiameter = function (radius) {
+//     return 2 * radius;
+// }
+
+// function CircleInfo()
+
+// const func = Function("x", "return x * x");
+// console.log(typeof func);
+
+// p.313
+
+// function foo() {
+//     x = 10;
+// }
+// foo();
+
+// console.log(x); // 10
+
+// p.317
+
+// (function() {
+//     'use strict';
+
+//     var x = 1;
+//     delete x; // SyntaxError: Delete of an unqualifed identifier in strict mode.
+
+//     function foo(a) {
+//         delete a; // SyntaxError: Delete of an unqualifed identifier in strict mode.
+//     }
+//     delete foo; // SyntaxError: Delete of an unqualifed identifier in strict mode.
+// }());
+
+// p.318
+
+// (function() {
+//     'use strict';
+
+//     // SyntaxError: Duplicate parameter name not allowed in this context
+//     function foo(x, x) {
+//         return x + x;
+//     }
+//     console.log(foo(1, 2));
+// }());
+
+// (function () {
+//     'use strict';
+
+//     // SyntaxError: Strict mode ode may not include a with statement
+//     with({ x : 1 }) {
+//         console.log(x);
+//     }
+// }());
+
+// // p.319
+
+// (function () {
+//     'use strict';
+
+//     function foo() {
+//         console.log(this);
+//     }
+//     foo();
+    
+//     new foo();
+// }());
+
+// p.324
+
+// // 1. 식별자 str은 문자열을 값으로 가지고 있다.
+// const str = 'hello';
+
+// // 2. 식별자 str은 암묵적으로 생성된 래퍼 객체를 기리킨다.
+// // 식별자 str의 값 'hello'는 래퍼 객체의 [[string data]] 내부 슬롯에 할당된다.
+// // 래퍼 객체에 name 프로퍼티가 동적 추가된다.
+// str.name = 'Lee';
+
+// // 3. 식별자 str은 다시 원래의 문자열, 즉 래퍼 객체의 [[StringData]] 내부 슬롯에 할당된 원시값을 갖는다.
+// // 이때 2. 에서 생성된 래퍼 객체는 아무도 참조하지 않는 상태이므로 가비지 컬렉션의 대상이 된다.
+
+// // 4. 식별자 str은 새롭게 암묵적으로 생성된[2. 에서 생성된 래퍼 객체와는 다른) 래퍼 객체를 가리킨다.
+// // 새롭게 생성된 래퍼 객체에는 name 프로퍼티가 존재하지 않는다.
+// console.log(str.name); // undefined
+
+// // 5. 식별자 str은 다시 원래의 문자열, 즉 래퍼 객체의 [[StringData]] 내부 슬롯에 할당된 원시값을 갖는다.
+// // 이때 4. 에서 생성된 래퍼 객체는 아무도 참조하지 않는 상태이므로 가비지 컬렉션의 대상이 된다.
+// console.log(typeof str, str); // string Hello
+
+// p.329
+
+// // 표현식인 문
+// eval('1 + 2;');
+// // 표현식이 아닌 문
+// eval('var x = 5;'); // -> undefined
+
+// // eval 함수에 의해 런타임에 변수 선언문이 실행되어 x 변수가 선언되었다.
+// console.log(x); // 5
+
+// // 객체 리터럴은 반드시 괄호로 둘러싼다.
+// const o = eval('({ a: 1 })');
+// console.log(o);
+
+// // 함수 리터럴은 반드시 괄호로 둘러싼다.
+// const f = eval('(function () { return 1;})');
+// console.log(f());
+
+// p.339
+// var x = 10; // 전역 변수
+
+// function foo() {
+//     // 선언하지 않은 식별자에 값을 할당
+//     y = 20; // window.y = 20;
+// }
+// foo();
+
+// // 선언하지 않은 식별자 y를 전역에서 참조할 수 있다.
+// console.log(x + y); // 30
+
+// p.345
+// // this는 어디서든지 참조 가능하다.
+// // 전역에서 this는 전역 객체 window를 가리킨다.
+// console.log(this);
+
+// function square(number) {
+//     // 일반 함수 내부에서 this는 전역 객체 window를 가리킨다.
+//     console.log(this);
+//     return number * number;
+// }
+// square(2);
+// new square(2);
+
+// const person = {
+//     name: 'Lee',
+//     getName() {
+//         // 메서드 내부에서 this는 메서드를 호출한 객체를 가리킨다.
+//         console.log(this);
+//         return this.name;
+//     }
+// };
+// console.log(person.getName());
+
+// function Person(name) {
+//     this.name = name;
+//     // 생성자 함수 내부에서 this는 생성자 함수가 생성할 인스턴스를 가리킨다.
+//     console.log(this);
+// }
+
+// const me = new Person('Lee');
+
+// p.351
+
+// const person = {
+//     name: 'Lee',
+//     getname() {
+//         // 메서드 내부의 this는 메서드를 호출한 객체에 바인딩된다.
+//         return this.name;
+//     }
+// };
+
+// // 메서드 getName을 호출한 객체는 person이다.
+// console.log(person.getname()); // Lee
+
+// const anotherPerson = {
+//     name: 'Kim'
+// };
+// // getName 메서드를 anotherPerson 객체의 메서드로 할당
+// anotherPerson.getName = person.getName;
+
+// // getName 메서드를 호출한 객체는 anotherPerson이다.
+// console.log(anotherPerson.getName());
+
+// // getName 메서드를 변수에 할당
+// const getName = person.getName;
+
+// // getName 메서드를 일반 함수로 호출
+// console.log(getName()); // ''
+// // 일반 함수로 호출된 getName 함수 내부의 this.name은 브라우저 환경에서 window.name과 같다.
