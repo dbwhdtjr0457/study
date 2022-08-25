@@ -345,7 +345,7 @@
 //         console.log(this);
 //     }
 //     foo();
-    
+
 //     new foo();
 // }());
 
@@ -459,3 +459,128 @@
 // // getName 메서드를 일반 함수로 호출
 // console.log(getName()); // ''
 // // 일반 함수로 호출된 getName 함수 내부의 this.name은 브라우저 환경에서 window.name과 같다.
+
+// p.402
+// // 카운트 상태 변경 함수
+// const increase = (function () {
+//     // 카운트 상태 변수
+//     let num = 0;
+
+//     // 클로저
+//     return function () {
+//         // 카운트 상태를 1만큼 증가시킨다.
+//         return ++num;
+//     }
+// }());
+
+// console.log(increase()); // 1
+// console.log(increase()); // 2
+// console.log(increase()); // 3
+// function makeUser() {
+//     return {
+//         name: "John",
+//         ref: this
+//     };
+// };
+
+// let user = makeUser();
+
+// console.log(user.ref); 
+
+// p. 429
+// class Person {
+//     constructor(name) {
+//         this.name = name;
+//     }
+
+//     sayHi() {
+//         console.log(`Hi! My name is ${this.name}`);
+//     }
+// }
+
+// const me = new Person('Lee');
+// me.sayHi();
+
+// p. 431
+// class Person {
+//     constructor(name) {
+//         this.name = name;
+//     }
+
+//     static sayHi() {
+//         console.log('Hi!');
+//     }
+// }
+
+// Person.sayHi(); // Hi!
+
+// p. 435
+// class Person {
+//     constructor(name) {
+//         // 1. 암묵적으로 인스턴스가 생성되고 this에 바인딩된다.
+//         console.log(this); // person {}
+//         console.log(Object.getPrototypeOf(this) === Person.prototype); // true
+
+//         // 2. this에 바인딩되어 있는 인스턴스를 초기화한다.
+//         this.name = name;
+
+//         // 3. 완성된 인스턴스가 바인딩된 this가 암묵적으로 반환된다.
+//     }
+// }
+
+// p. 436
+// class Person {
+//     constructor(name) {
+//         this.name = name;
+//     }
+// }
+
+// const me = new Person('Lee');
+// console.log(me); // Person {name: "Lee"}
+
+// p. 438
+// class Person {
+//     constructor(firstname, lastName) {
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+//     }
+
+//     // fullName은 접근자 함수로 구성된 접근자 프로퍼티다.
+//     // getter 함수
+//     get fullName() {
+//         return `${this.firstName} ${this.lastName}`;
+//     }
+
+//     // setter 함수
+//     set fullName(name) {
+//         [this.firstName, this.lastName] = name.split(' ');
+//     }
+// }
+
+// const me = new Person('Ungmo', 'Lee');
+
+// // 데이터 프로퍼티를 통한 프로퍼티 값의 참조.
+// console.log(`${me.firstName} ${me.lastName}`) // Ungmo Lee
+
+// // 접근자 프로퍼티를 통한 프로퍼티 값의 저장
+// // 접근자 프로퍼티 fullName에 값을 저장하면 setter 함수가 호출된다.
+// me.fullName = 'Heegun Lee';
+// console.log(me); // {firstName: "Heegun", lastName: "Lee"}
+
+// // 접근자 프로퍼티를 통한 프로퍼티 값의 참조
+// // 접근자 프로퍼티 fullName에 접근하면 getter 함수가 호출된다.
+// console.log(me.fullName); // Heegun Lee
+
+// // fullName은 접근자 프로퍼티다.
+// // 접근자 프로퍼티는 get, set, enumerable, configurable 프로퍼티 어트리뷰트를 갖는다.
+// console.log(Object.getOwnPropertyDescriptor(Person.prototype, 'fullName'));
+// // {get: f, set: f, enumerable: false, configurable: true}
+
+// p. 441
+class Person {
+    // 클래스 필드 정으
+    name = 'Lee';
+}
+
+const me = new Person();
+console.log(me); // Person {name: "Lee"}
