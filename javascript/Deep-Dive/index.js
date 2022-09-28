@@ -577,10 +577,129 @@
 // // {get: f, set: f, enumerable: false, configurable: true}
 
 // p. 441
-class Person {
-    // 클래스 필드 정으
-    name = 'Lee';
+// class Person {
+//     // 클래스 필드 정으
+//     name = 'Lee';
+// }
+
+// const me = new Person();
+// console.log(me); // Person {name: "Lee"}
+
+// // p. 446
+// class Person {
+//     // private 필드 정의
+//     #name = '';
+
+//     constructor(name) {
+//         this.#name = name;
+//     }
+
+//     // name은 접근자 프로퍼티다.
+//     get name() {
+//         return this.#name.trim();
+//     }
+// }
+
+// const me = new Person(' Lee ');
+// console.log(me.name); // Lee
+
+// // p. 619
+// const arrayLike = {
+//     0: 1,
+//     1: 2,
+//     2: 3,
+//     length: 3
+// };
+
+// // 유사 배열 객체는 length 프로퍼티를 갖기 때문에 for 문으로 순회할 수 있다.
+// for (let i = 0; i < arrayLike.length; i++) {
+//     // 유사 배열 객체는 마치 배열처럼 인덱스로 프로퍼티 값에 접근할 수 있다.
+//     console.log(arrayLike[i]); // 1 2 3
+// }
+
+// // p.637
+// const arr = [1, 2, 3];
+
+// const [one, two, three] = arr;
+
+// console.log(one, two, three); // 1 2 3
+
+// // p.639
+// const user = { firstName: 'Ungmo', lastName: 'Lee' };
+
+// const { lastName, firstName } = user;
+
+// console.log(firstName, lastName); // Ungmo Lee
+
+// const set = new Set();
+// console.log(set.add(1).add(2).add(1).delete(3));
+
+// console.log(set.size);
+
+// setTimeout(() => console.log("first!"), 1000);
+// setTimeout(() => console.log("second!"), 2000);
+
+// const promiseGet = url => {
+//     return new Promise((resolve, reject) => {
+//         const xhr = new XMLHttpRequest();
+//         xhr.open('GET', url);
+//         xhr.send();
+
+//         xhr.onload = () => {
+//             if (xhr.status === 200) {
+//                 resolve(JSON.parse(xhr.response));
+//             }
+//             else {
+//                 reject(new Error(xhr.status));
+//             }
+//         }
+//     })
+// }
+
+// const wrongUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+
+// promiseGet(wrongUrl)
+//     .then(res => console.log(res))
+//     .catch(err => console.error(err));
+
+// // 제너레이터 함수 선언문
+// function* genDecFunc() {
+//     yield 1;
+// }
+
+// // 제너레이터 함수 표현식
+// const genExpFunc = function* () {
+//     yield 1;
+// }
+
+// // 제너레이터 메서드
+// const obj = {
+//     * genObjMethod() {
+//         yield 1;
+//     }
+// }
+
+// // 제너레이터 클래스 메서드
+// class MyClass {
+//     * genClsMethod() {
+//         yield 1;
+//     }
+// }
+
+const foo = () => {
+    throw Error('foo에서 발생한 에러');
 }
 
-const me = new Person();
-console.log(me); // Person {name: "Lee"}
+const bar = () => {
+    foo();
+};
+
+const baz = () => {
+    bar();
+}
+
+try {
+    baz();
+} catch (err) {
+    console.error(err);
+}
