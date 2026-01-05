@@ -1,0 +1,14 @@
+translate_task:
+  description: >
+    영어로 된 {sentence}를 한국어로 번역하는 작업입니다. {sentence}의 맥락과 의미를 정확하게 전달하면서 자연스러운 한국어 표현을 사용해야 합니다.
+  expected_output: >
+    {sentence}의 정확하고 자연스러운 한국어 번역문.
+  agent: translater_agent
+
+retranslate_task:
+# 한국어에서 일본어로
+  description: >
+    한국어로 된 {sentence}를 일본어로 번역하는 작업입니다. {sentence}의 맥락과 의미를 정확하게 전달하면서 자연스러운 일본어 표현을 사용해야 합니다.
+  expected_output: >
+    {sentence}의 정확하고 자연스러운 일본어 번역문.
+  agent: retranslator_agent
