@@ -1,1 +1,1 @@
-console.log(Object.getOwnPropertyNames(String.prototype))
+console.log(-1 + '2')
